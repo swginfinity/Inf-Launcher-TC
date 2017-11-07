@@ -36,7 +36,7 @@ const gamesettingsBtn = document.getElementById('gamesettings');
 const versionDiv = document.getElementById('version');
 versionDiv.innerHTML = package.version;
 
-const configFile = require('os').homedir() + '/Infinity-Launcher.json';
+const configFile = require('os').homedir() + '/Infinity-tc-Launcher.json';
 var config = {folder: 'C:\\SWGInfinity'};
 if (fs.existsSync(configFile))
     config = JSON.parse(fs.readFileSync(configFile));
@@ -279,7 +279,7 @@ function disableAll() {
     browseBtn.disabled = true;
     for (var child of modListBox.children) {
         child.children[0].disabled = true;
-    }    
+    }
 }
 
 function enableAll() {
@@ -290,7 +290,7 @@ function enableAll() {
     browseBtn.disabled = false;
     for (var child of modListBox.children) {
         child.children[0].disabled = false;
-    }    
+    }
 }
 
 function saveConfig() {

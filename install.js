@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const request = require('request');
+const server = require('./server');
 
 module.exports.getManifest = function(mods, fullScan, emuPath, checkFiles) {
     if (!mods) mods = [];
@@ -8,12 +9,12 @@ module.exports.getManifest = function(mods, fullScan, emuPath, checkFiles) {
     if (fullScan || emuPath && !fs.existsSync(path.join(emuPath, "swgemu.cfg"))) {
         //force download with size:0, md5:""
         files = files.concat([
-            {name:"swgemu.cfg", size:0, md5:"", url:"http://www.swginfinity.com/updates/tc/swgemu.cfg"},
-            {name:"swgemu_machineoptions.iff", size:0, md5:"", url:"http://www.swginfinity.com/updates/tc/swgemu_machineoptions.iff"},
-            {name:"swgemu_preload.cfg", size:0, md5:"", url:"http://www.swginfinity.com/updates/tc/swgemu_preload.cfg"}
+            {name:"swgemu.cfg", size:0, md5:"", url:"https://www.dropbox.com/s/xd5aqsyng6pheto/swgemu.cfg?dl=1"},
+            {name:"swgemu_machineoptions.iff", size:0, md5:"", url:"https://www.dropbox.com/s/8bv7tna4kwi85fe/swgemu_machineoptions.iff?dl=1"},
+            {name:"swgemu_preload.cfg", size:0, md5:"", url:"https://www.dropbox.com/s/6xhfjws4qs63pgu/swgemu_preload.cfg?dl=1"}
         ]);
     }
-    request({url:"http://www.swginfinity.com/updates/tc/manifest.json", json:true}, function(err, response, body) {
+    request({url:server.manifestUrl, json:true}, function(err, response, body) {
         if (err) return console.error(err);
 
         var allmods = [];

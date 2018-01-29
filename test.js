@@ -1,6 +1,6 @@
 const request = require('request');
 const fs = require('fs');
-var url = "http://www.swginfinity.com/updates/tc/infinity_00.tre";
+var url = "https://www.dropbox.com/s/9oqihybyfon4bmf/infinity_00.tre?dl=1";
 var file = fs.createWriteStream("C:\\SWGTest\\infinity_00.tre");
 request(url).on('error', err => {
     process.send("download error " + err);

@@ -1,1 +1,5 @@
-{"address": "testcenter.swginfinity.com", "port": "44453"}
+{
+    "address": "tc.swginfinity.com",
+    "port": "44453",
+    "manifestUrl": "http://www.swginfinity.com/updates/tc/manifest.json"
+}

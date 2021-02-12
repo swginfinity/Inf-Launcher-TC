@@ -6,7 +6,7 @@ const server = require('./server');
 module.exports.getManifest = function(mods, fullScan, emuPath, checkFiles) {
     if (!mods) mods = [];
     var files = require('./required');
-    if (fullScan || emuPath && !fs.existsSync(path.join(emuPath, "swgemu.cfg"))) {
+    if (fullScan || (emuPath && !fs.existsSync(path.join(emuPath, "swgemu.cfg")))) {
         //force download with size:0, md5:""
         files = files.concat([
             {name:"swgemu.cfg", size:0, md5:"", url:"https://www.dropbox.com/s/xd5aqsyng6pheto/swgemu.cfg?dl=1"},

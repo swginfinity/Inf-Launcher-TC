@@ -38,7 +38,7 @@ const versionDiv = document.getElementById('version');
 versionDiv.innerHTML = package.version;
 
 const configFile = require('os').homedir() + '/Infinity-tc-Launcher.json';
-var config = {folder: 'C:\\SWGInfinity'};
+var config = {folder: 'C:\\SWGInfinity TC'};
 if (fs.existsSync(configFile))
     config = JSON.parse(fs.readFileSync(configFile));
 folderBox.value = config.folder;

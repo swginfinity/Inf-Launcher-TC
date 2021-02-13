@@ -10,7 +10,6 @@ const path = require('path');
 
 const playBtn = document.getElementById('play');
 const settingsBtn = document.getElementById('settings');
-const profcalcBtn = document.getElementById('profcalc');
 const websiteBtn = document.getElementById('web');
 const discordBtn = document.getElementById('disc');
 
@@ -37,7 +36,7 @@ const gamesettingsBtn = document.getElementById('gamesettings');
 const versionDiv = document.getElementById('version');
 versionDiv.innerHTML = package.version;
 
-const configFile = require('os').homedir() + '/Infinity-tc-Launcher.json';
+const configFile = require('os').homedir() + '/Infinity-TC-Launcher.json';
 var config = {folder: 'C:\\SWGInfinity TC'};
 if (fs.existsSync(configFile))
     config = JSON.parse(fs.readFileSync(configFile));
@@ -92,9 +91,6 @@ playBtn.addEventListener('click', event => {
     }
 });
 
-profcalcBtn.addEventListener('click', function (event) {
-    ipc.send('open-profcalc');
-});
 
 function play() {
     fs.writeFileSync(path.join(config.folder, "swgemu_login.cfg"), `[ClientGame]\r\nloginServerAddress0=${server.address}\r\nloginServerPort0=${server.port}\r\nfreeChaseCameraMaximumZoom=${config.zoom}`);
@@ -335,7 +331,12 @@ function removeHeader(webview) {
       }</style>\"");
     }
 }
+
+versionDiv.addEventListener('click', event => remote.getCurrentWindow().toggleDevTools());
+
+/*
 news.addEventListener("dom-ready", removeHeader(news));
 updates.addEventListener("dom-ready", removeHeader(updates));
+*/
 
-versionDiv.addEventListener('click', event => remote.getCurrentWebContents().openDevTools());
+

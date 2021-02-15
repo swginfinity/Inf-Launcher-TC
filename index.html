@@ -97,17 +97,22 @@
       #settings { background:url(./img/settingsbutton.png) no-repeat; }
       #settings:hover { background:url(./img/settingsbuttonhov.png) no-repeat; }
       #settings:active, #settings.active { background:url(./img/settingsbuttonclick.png) no-repeat; }
-      #settings:disabled { background:url(./img/settingsbuttondis.png) no-repeat; }
 
       #web { background:url(./img/webbutton.png) no-repeat; }
       #web:hover { background:url(./img/webbuttonhov.png) no-repeat; }
       #web:active { background:url(./img/webbuttonclick.png) no-repeat; }
-      #web:disabled { background:url(./img/webbuttondis.png) no-repeat; }
 
       #disc { background:url(./img/discbutton.png) no-repeat; }
       #disc:hover { background:url(./img/discbuttonhov.png) no-repeat; }
       #disc:active { background:url(./img/discbuttonclick.png) no-repeat; }
-      #disc:disabled { background:url(./img/discbuttondis.png) no-repeat; }
+ 
+      #donate { background:url(./img/donatebutton.png) no-repeat; }
+      #donate:hover { background:url(./img/donatebuttonhov.png) no-repeat; }
+      #donate:active { background:url(./img/donatebuttonclick.png) no-repeat; }
+
+      #skillcalc { background:url(./img/skillcalcbutton.png) no-repeat; }
+      #skillcalc:hover { background:url(./img/skillcalcbuttonhov.png) no-repeat; }
+      #skillcalc:active { background:url(./img/skillcalcbuttonclick.png) no-repeat; }
 
       #home { background:url(./img/homebutton.png) no-repeat; }
       #home:hover { background:url(./img/homebuttonhov.png) no-repeat; }
@@ -121,8 +126,8 @@
     </style>
   </head>
   <body style="overflow:hidden; height: 100%;user-select: none">
-    <img class="header-img" src="./img/launcher-background1.png" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: -1;"/>
-    <div style="position: absolute; top:5px; right: 5px; z-index: 1000">
+     <img class="header-img" src="./img/launcher-background1.png" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: -1;"/>
+     <div style="position: absolute; top:5px; right: 5px; z-index: 1000">
       <button id="minimize" class="traybutton"></button>
       <button id="maximize" class="traybutton"></button>
       <button id="close" class="traybutton"></button>
@@ -173,8 +178,11 @@
       <div id="progresstext" style="position:absolute;top:0;width:100%;height:100%;text-align:center; color:#FFFFFF"></div>
     </div>
     <button id="settings" class="button" style="top: 48%; left: 0%"></button>
-    <button id="web" class="button" style="top: 68%; left: 0%;"></button>
-    <button id="disc" class="button" style="top: 79%; left: 0%;"></button>
+    <button id="disc" class="button" style="top: 58%; left: 0%;"></button>
+    <button id="donate" class="button" style="top:68%; left: 0%;"></button>
+    <button id="skillcalc" class="button" style="top: 78%; left: 0%"></button>
+    <button id="web" class="button" style="top: 88%; left: 0%;"></button>
+
     <div id="version"></div>
   </body>
 

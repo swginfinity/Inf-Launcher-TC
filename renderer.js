@@ -7,11 +7,14 @@ const server = require('./server');
 const package = require('./package');
 const install = require('./install');
 const path = require('path');
+const os = require('electron').remote.require('os');
 
 const playBtn = document.getElementById('play');
 const settingsBtn = document.getElementById('settings');
 const websiteBtn = document.getElementById('web');
 const discordBtn = document.getElementById('disc');
+const donateBtn = document.getElementById('donate');
+const skillcalcBtn = document.getElementById('skillcalc');
 
 const rightContent = document.getElementById('rightcontent');
 const rightSettings = document.getElementById('rightsettings');
@@ -104,10 +107,26 @@ function play() {
     child.unref();
 }
 
+//SKILLPLANNER EXE 
+skillcalcBtn.addEventListener('click', event => {
+       if (os.platform() === 'win32') {
+        const child = process.spawn("cmd", ["/c", path.join(config.folder, "KSWGProfCalcEditor.exe")], {cwd: config.folder, detached: true, stdio: 'ignore'});
+        child.unref();
+      } else {
+        const child = process.exec('wine KSWGProfCalcEditor.exe', {cwd: config.folder, detached: true, stdio: 'ignore'}, function(error, stdout, stderr){});
+        child.unref();
+      }
+});
+
 gamesettingsBtn.addEventListener('click', event => {
-    const child = process.spawn("cmd", ["/c", path.join(config.folder, "SWGEmu_Setup.exe")], {cwd: config.folder, detached: true, stdio: 'ignore'});
-    child.unref();
-})
+    if (os.platform() === 'win32') {
+        const child = process.spawn("cmd", ["/c", path.join(config.folder, "SWGEmu_Setup.exe")], {cwd: config.folder, detached: true, stdio: 'ignore'});
+        child.unref();
+      } else {
+        const child = process.exec('wine SWGEmu_Setup.exe', {cwd: config.folder, detached: true, stdio: 'ignore'}, function(error, stdout, stderr){});
+        child.unref();
+      }
+});
 
 settings.addEventListener('click', event => {
     if (rightContent.style.display == 'none') {
@@ -129,6 +148,7 @@ home.addEventListener('click', event => {
 
 websiteBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/"));
 discordBtn.addEventListener('click', event => shell.openExternal("https://discordapp.com/channels/328626951315259395/328626951315259395"));
+donateBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/donate/"));
 
 browseBtn.addEventListener('click', function (event) {
     ipc.send('open-directory-dialog', 'selected-directory');
@@ -159,7 +179,7 @@ zoomSel.addEventListener('change', event => {
 });
 
 installBtn.addEventListener('click', function(event) {
-    if (installBtn.disabled = false) return;
+    if (installBtn.disabled == false) return;
     installBtn.disabled = true;
     ipc.send('open-directory-dialog', 'install-selected');
 });

@@ -9,15 +9,22 @@ module.exports.getManifest = function(mods, fullScan, emuPath, checkFiles) {
     if (fullScan || (emuPath && !fs.existsSync(path.join(emuPath, "swgemu.cfg")))) {
         //force download with size:0, md5:""
         files = files.concat([
-            {name:"swgemu.cfg", size:0, md5:"", url:"https://www.dropbox.com/s/xd5aqsyng6pheto/swgemu.cfg?dl=1"},
-            {name:"swgemu_machineoptions.iff", size:0, md5:"", url:"https://www.dropbox.com/s/8bv7tna4kwi85fe/swgemu_machineoptions.iff?dl=1"},
-            {name:"swgemu_preload.cfg", size:0, md5:"", url:"https://www.dropbox.com/s/6xhfjws4qs63pgu/swgemu_preload.cfg?dl=1"}
+	//Server specific files
+            {name:"swgemu.cfg", size:0, md5:"", url:"https://www.swginfinity.com/updates/tc/swgemu.cfg"},
+            {name:"swgemu_live.cfg", size:0, md5:"", url:"https://www.swginfinity.com/updates/tc/swgemu_live.cfg"},
+            {name:"swgemu_login.cfg", size:0, md5:"", url:"https://www.swginfinity.com/updates/tc/swgemu_login.cfg"},
+            {name:"user_infinity.cfg", size:0, md5:"", url:"https://www.swginfinity.com/updates/tc/user_infinity.cfg"},
+
+	//Files for Initial Install and Full Recan (Both Live and TC)
+            {name:"swgemu_preload.cfg", size:0, md5:"", url:"www.swginfinity.com/updates/fullscan/swgemu_preload.cfg"},
+            {name:"swgemu_machineoptions.iff", size:0, md5:"", url:"www.swginfinity.com/updates/fullscan/swgemu_machineoptions.iff"},
+	    {name:"KSWGProfCalc.dat", size:0, md5:0, url:"http://www.swginfinity.com/updates/fullscan/KSWGProfCalc.dat"}, 
+	    {name:"KSWGProfCalcEditor.exe", size:0, md5:0, url:"http://www.swginfinity.com/updates/fullscan/KSWGProfCalcEditor.exe"}
         ]);
     }
     request({url:server.manifestUrl, json:true}, function(err, response, body) {
         if (err) return console.error(err);
-
-        var allmods = [];
+	var allmods = [];
         for (var mod in body) if (mod != 'required') allmods.push(mod);
         if (module.exports.modList) module.exports.modList(allmods);
         files = unionByName(files, body.required);
@@ -115,8 +122,8 @@ if (process.send) {
             if (stats.size != fileInfo.size) {process.send("size mismatch actual: " + stats.size + ' expected: ' + fileInfo.size); return doDownload();}
             if (process.env.fullScan)
                 md5(src, hash => {
-                    if (hash != fileInfo.md5) {
-                        process.send('md5 mismatch actual: ' + hash + ' expected: ' + fileInfo.md5);
+                    if (hash != String(fileInfo.md5).toLowerCase() && fileInfo.md5 != 0) {
+                        process.send('md5 mismatch actual: ' + hash + ' expected: ' + String(fileInfo.md5).toLowerCase());
                         progress(-fileInfo.size);
                         return doDownload();
                     }

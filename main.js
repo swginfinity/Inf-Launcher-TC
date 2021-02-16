@@ -3,27 +3,57 @@ const log = require('electron-log');
 const {autoUpdater} = require('electron-updater');
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
 
-log.transports.file.file = require('os').homedir() + '/inf-launcher-log.txt';
+var setupWindow = null;
+var err;
+
+app.commandLine.appendSwitch("disable-http-cache");
+
+log.transports.file.file = require('os').homedir() + '/SWGInfinity-TC-Launcher-log.txt';
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
-log.info('App starting...');
+//log.info('App starting...');
 
 let mainWindow;
 
-function createWindow () {
-  mainWindow = new BrowserWindow({width: 1024, minWidth: 1024, height: 600, minHeight: 600, show: false, autoHideMenuBar: true, frame: false});
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
-  if (require('electron-is-dev')) mainWindow.webContents.openDevTools();
-  mainWindow.once('ready-to-show', () => mainWindow.show());
-  mainWindow.once('closed', () => mainWindow = null);
+function createWindow() {
+	mainWindow = new BrowserWindow({
+		width: 1024,
+		height: 610,
+		useContentSize: true,
+		center: true,
+		resizable: false,
+		fullscreen: false,
+		fullscreenable: false,
+		maximizable: false,
+		minWidth: 1024,
+		minHeight: 610,
+		maxWidth: 1024,
+		maxHeight: 610,
+		transparent: true,
+		show: false,
+		autoHideMenuBar: true,
+		frame: false,
+		webPreferences: { 
+			disableBlinkFeatures: "Auxclick",
+			nodeIntegration: true,
+			enableRemoteModule: true,
+			webviewTag: true
+		},
+    		icon: path.join(__dirname, 'img/infinity_launcher_logo_icon.ico')
+  	});
+	mainWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'index.html'),
+		protocol: 'file:',
+		slashes: true
+	 }));
+	  if (require('electron-is-dev')) mainWindow.webContents.openDevTools();
+	  mainWindow.once('ready-to-show', () => mainWindow.show());
+	  mainWindow.once('closed', () => mainWindow = null);  
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => setTimeout(createWindow, 100)); // Linux / MacOS transparancy fix
 app.on('window-all-closed', () => app.quit());
 
 ipcMain.on('open-directory-dialog', function (event, response) {
@@ -34,28 +64,19 @@ ipcMain.on('open-directory-dialog', function (event, response) {
   });
 });
 
-ipcMain.on('open-profcalc', function() {
-  window = new BrowserWindow({width: 1296, height: 839, autoHideMenuBar: true});
-  window.loadURL(url.format({
-    pathname: path.join(__dirname, 'profcalc', 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
-  if (require('electron-is-dev')) window.webContents.openDevTools();
-});
-
 autoUpdater.on('update-downloaded', (info) => {
-  autoUpdater.quitAndInstall();  
+  autoUpdater.quitAndInstall();
 });
 
 autoUpdater.on('download-progress', (progress) => {
   mainWindow.webContents.send('download-progress', progress);
-})
+});
 
 autoUpdater.on('update-available', info => {
-  mainWindow.webContents.send('downloading-update', 'Downloading version ' + info.version);
-})
+  mainWindow.webContents.send('downloading-update', 'Downloading Update ' + info.version);
+});
 
 app.on('ready', function()  {
-  autoUpdater.checkForUpdates();
+  if (!require('electron-is-dev'))
+    autoUpdater.checkForUpdates();
 });

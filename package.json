@@ -21,24 +21,24 @@
     "emu",
     "swgemu"
   ],
-  "author": "Progor adapted by Qrave",
+  "author": "Progor adapted by Qrave and MrObvious",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.6.2",
-    "electron-builder": "^19.56.2"
+    "electron": "^3.1.13",
+    "electron-builder": "^20.44.4"
   },
   "dependencies": {
-    "adm-zip": "^0.4.16",
+    "adm-zip": "^0.4.11",
     "electron-is-dev": "^0.2.0",
-    "electron-log": "^2.2.7",
-    "electron-updater": "^2.18.2",
-    "follow-redirects": "^1.2.4",
+    "electron-log": "^2.2.17",
+    "electron-updater": "^4.3.5",
+    "follow-redirects": "^1.5.9",
+    "mkdirp": "^0.5.1",
     "random-access-file": "^1.8.1",
-    "request": "^2.81.0",
-    "windows-elevate": "^1.0.1"
+    "request": "^2.88.0"
   },
   "build": {
-    "productName": "Infinity TC Launcher",
+    "productName": "SWG Infinity TC Launcher",
     "win": {
       "target": [
         "nsis",

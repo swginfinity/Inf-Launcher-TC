@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <title>Infinity TC Launcher</title>
     <style>
       .button {
@@ -119,7 +119,6 @@
       #home:active { background:url(./img/homebuttonclick.png) no-repeat; }
 
       #minimize { background:url(./img/minimize.png) no-repeat; }
-      #maximize { background:url(./img/maximize.png) no-repeat; }
       #close { background:url(./img/close.png) no-repeat; }
 
       .webview-wrapper {border-radius: 5px; padding: 5px 0; background-color: white; box-sizing:border-box}
@@ -129,12 +128,11 @@
      <img class="header-img" src="./img/launcher-background1.png" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: -1;"/>
      <div style="position: absolute; top:5px; right: 5px; z-index: 1000">
       <button id="minimize" class="traybutton"></button>
-      <button id="maximize" class="traybutton"></button>
-      <button id="close" class="traybutton"></button>
+       <button id="close" class="traybutton"></button>
     </div>
     <div id="rightcontent" class="rightbox">
          <div class="webview-wrapper right shadow" style="top:160px; height: calc(80% - 100px);">
-        <webview id="news" style="width:100%;height:100%" src="http://swginfinity.com/blog/"></webview>
+        <webview id="blog" style="width:100%;height:100%" src="https://swginfinity.com/blog/#content"></webview>
       </div>
     </div>
     <div id="rightsettings" class="rightbox" style="display:none">

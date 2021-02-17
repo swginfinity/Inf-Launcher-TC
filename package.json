@@ -22,7 +22,7 @@
     "emu",
     "swgemu"
   ],
-  "author": "Progor adapted by Qrave and MrObvious",
+  "author": "SWG Infinity Developers",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^11.2.3",

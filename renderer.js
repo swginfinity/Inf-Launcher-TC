@@ -15,6 +15,7 @@ const websiteBtn = document.getElementById('web');
 const discordBtn = document.getElementById('disc');
 const donateBtn = document.getElementById('donate');
 const skillcalcBtn = document.getElementById('skillcalc');
+const newsHeader = document.getElementById('newsheader');
 
 const rightContent = document.getElementById('rightcontent');
 const rightSettings = document.getElementById('rightsettings');
@@ -27,7 +28,7 @@ const modListBox = document.getElementById('modlist');
 const progressBox = document.getElementById('progressbox');
 const progressBar = document.getElementById('progress');
 const progressText = document.getElementById('progresstext');
-const blog = document.getElementById('blog');
+const news = document.getElementById('news');
 //const updates = document.getElementById('updates');
 const minBtn = document.getElementById('minimize');
 const maxBtn = document.getElementById('maximize');
@@ -126,10 +127,12 @@ settings.addEventListener('click', event => {
         rightContent.style.display = 'block';
         rightSettings.style.display = 'none';
         settings.className = "button";
+        newsHeader.style.display = 'block';
     } else {
         rightContent.style.display = 'none';
         rightSettings.style.display = 'block';
         settings.className = "button active";
+        newsHeader.style.display = 'none';
     }
 });
 
@@ -144,7 +147,7 @@ discordBtn.addEventListener('click', event => shell.openExternal("https://discor
 donateBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/donate/"));
 versionDiv.addEventListener('click', event => remote.getCurrentWindow().toggleDevTools());
 
-// blog.addEventListener("dom-ready", scrollDown(blog));
+// news.addEventListener("dom-ready", scrollDown(news));
 
 browseBtn.addEventListener('click', function (event) {
     ipc.send('open-directory-dialog', 'selected-directory');

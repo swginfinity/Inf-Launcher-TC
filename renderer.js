@@ -95,6 +95,7 @@ playBtn.addEventListener('click', event => {
         })
     } else {
         play();
+	goHome();
     }
 });
 
@@ -120,14 +121,19 @@ skillcalcBtn.addEventListener('click', event => {
 gamesettingsBtn.addEventListener('click', event => {
     const child = process.spawn("cmd", ["/c", path.join(config.folder, "SWGEmu_Setup.exe")], {cwd: config.folder, detached: true, stdio: 'ignore'});
     child.unref();
-})
+});
+
+function goHome() {
+    rightContent.style.display == 'none';
+    rightContent.style.display = 'block';
+    rightSettings.style.display = 'none';
+    settings.className = "button";
+    newsHeader.style.display = 'block';
+}
 
 settings.addEventListener('click', event => {
     if (rightContent.style.display == 'none') {
-        rightContent.style.display = 'block';
-        rightSettings.style.display = 'none';
-        settings.className = "button";
-        newsHeader.style.display = 'block';
+        goHome();
     } else {
         rightContent.style.display = 'none';
         rightSettings.style.display = 'block';
@@ -136,11 +142,8 @@ settings.addEventListener('click', event => {
     }
 });
 
-home.addEventListener('click', event => {
-    rightContent.style.display = 'block';
-    rightSettings.style.display = 'none';
-    settings.className = "button";
-});
+
+home.addEventListener('click', event => goHome());
 
 websiteBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/"));
 discordBtn.addEventListener('click', event => shell.openExternal("https://discordapp.com/channels/328626951315259395/328626951315259395"));

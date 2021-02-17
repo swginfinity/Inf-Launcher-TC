@@ -5,9 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "build --win --ia32 -p always",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "build": "build --win --ia32 -p never",
+    "deploy": "build --win --ia32 -p always"
   },
   "repository": "https://github.com/swginfinity/Inf-Launcher-TC",
   "homepage": "https://www.swginfinity.com",
@@ -44,6 +43,7 @@
   "build": {
     "productName": "Infinity TC Launcher",
     "win": {
+      "requestedExecutionLevel": "highestAvailable",
       "target": [
         "nsis",
         "zip"

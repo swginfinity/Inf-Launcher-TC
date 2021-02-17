@@ -38,7 +38,7 @@
     "request": "^2.88.0"
   },
   "build": {
-    "productName": "SWG Infinity TC Launcher",
+    "productName": "Infinity TC Launcher",
     "win": {
       "target": [
         "nsis",

@@ -138,9 +138,9 @@ settings.addEventListener('click', event => {
 
 home.addEventListener('click', event => goHome());
 
-websiteBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/"));
+websiteBtn.addEventListener('click', event => shell.openExternal("https://www.swginfinity.com/"));
 discordBtn.addEventListener('click', event => shell.openExternal("https://discordapp.com/channels/328626951315259395/328626951315259395"));
-donateBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/donate/"));
+donateBtn.addEventListener('click', event => shell.openExternal("https://www.swginfinity.com/donate/"));
 versionDiv.addEventListener('click', event => remote.getCurrentWindow().toggleDevTools());
 
 browseBtn.addEventListener('click', function (event) {

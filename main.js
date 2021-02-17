@@ -48,7 +48,7 @@ function createWindow() {
 		protocol: 'file:',
 		slashes: true
 	 }));
-	  if (require('electron-is-dev')) mainWindow.webContents.openDevTools();
+	  //if (require('electron-is-dev')) mainWindow.webContents.openDevTools();
 	  mainWindow.once('ready-to-show', () => mainWindow.show());
 	  mainWindow.once('closed', () => mainWindow = null);  
 }
@@ -56,12 +56,14 @@ function createWindow() {
 app.on('ready', () => setTimeout(createWindow, 100)); // Linux / MacOS transparancy fix
 app.on('window-all-closed', () => app.quit());
 
-ipcMain.on('open-directory-dialog', function (event, response) {
-  dialog.showOpenDialog({
+ipcMain.on('open-directory-dialog', async (event, response) => {
+  const result = await dialog.showOpenDialog({
     properties: ['openDirectory']
-  }, function (files) {
-    if (files) event.sender.send(response, files[0])
   });
+  if (result.filePaths[0] != undefined) {
+	  event.sender.send(response, result.filePaths[0]);
+  }
+  log.info('Selected Directory Path', result.filePaths[0]);
 });
 
 autoUpdater.on('update-downloaded', (info) => {

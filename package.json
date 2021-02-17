@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "build --win --ia32 -p always"
+    "build": "build --win --ia32 -p always",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": "https://github.com/swginfinity/Inf-Launcher-TC",
   "homepage": "https://www.swginfinity.com",
@@ -24,18 +26,20 @@
   "author": "Progor adapted by Qrave and MrObvious",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^3.1.13",
+    "electron": "^11.2.3",
     "electron-builder": "^20.44.4"
   },
   "dependencies": {
-    "adm-zip": "^0.4.11",
+    "adm-zip": "^0.5.2",
     "electron-is-dev": "^0.2.0",
-    "electron-log": "^2.2.17",
+    "electron-log": "^4.3.1",
     "electron-updater": "^4.3.5",
-    "follow-redirects": "^1.5.9",
-    "mkdirp": "^0.5.1",
-    "random-access-file": "^1.8.1",
-    "request": "^2.88.0"
+    "follow-redirects": "^1.13.2",
+    "mkdirp": "^1.0.4",
+    "node": "^15.8.0",
+    "npm": "^7.5.4",
+    "random-access-file": "^2.1.5",
+    "request": "^2.88.2"
   },
   "build": {
     "productName": "Infinity TC Launcher",

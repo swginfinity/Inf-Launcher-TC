@@ -1,4 +1,5 @@
-const ipc = require('electron').ipcRenderer;
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
 const shell = require('electron').shell;
 const remote = require('electron').remote;
 const fs = require('fs');
@@ -29,7 +30,6 @@ const progressBox = document.getElementById('progressbox');
 const progressBar = document.getElementById('progress');
 const progressText = document.getElementById('progresstext');
 const news = document.getElementById('news');
-//const updates = document.getElementById('updates');
 const minBtn = document.getElementById('minimize');
 const maxBtn = document.getElementById('maximize');
 const closeBtn = document.getElementById('close');
@@ -69,13 +69,6 @@ zoomSel.value = config.zoom;
 if (needSave) saveConfig();
 
 minBtn.addEventListener('click', event => remote.getCurrentWindow().minimize());
-/*
-maxBtn.addEventListener('click', event => {
-    var window = remote.getCurrentWindow();
-    if (!window.isMaximized()) window.maximize();
-    else window.unmaximize();
-});
-*/
 closeBtn.addEventListener('click', event => remote.getCurrentWindow().close());
 
 playBtn.addEventListener('click', event => {
@@ -95,7 +88,7 @@ playBtn.addEventListener('click', event => {
         })
     } else {
         play();
-	goHome();
+	    goHome();
     }
 });
 
@@ -150,8 +143,6 @@ discordBtn.addEventListener('click', event => shell.openExternal("https://discor
 donateBtn.addEventListener('click', event => shell.openExternal("http://www.swginfinity.com/donate/"));
 versionDiv.addEventListener('click', event => remote.getCurrentWindow().toggleDevTools());
 
-// news.addEventListener("dom-ready", scrollDown(news));
-
 browseBtn.addEventListener('click', function (event) {
     ipc.send('open-directory-dialog', 'selected-directory');
 });
@@ -171,10 +162,12 @@ fpsSel.addEventListener('change', event => {
     config.fps = event.target.value;
     saveConfig();
 });
+
 ramSel.addEventListener('change', event => {
     config.ram = event.target.value;
     saveConfig();
 });
+
 zoomSel.addEventListener('change', event => {
     config.zoom = event.target.value;
     saveConfig();
@@ -190,9 +183,10 @@ cancelBtn.addEventListener('click', function(event) {
     install.cancel();
     enableAll();
     progressBox.style.display = 'none';
-})
+});
 
 ipc.on('install-selected', function (event, path) {
+    log.info('ipc on install-selected called');
     disableAll();
     resetProgress();
     install.install(path, config.folder, config.mods);
@@ -205,7 +199,7 @@ ipc.on('downloading-update', function (event, text) {
 
 ipc.on('download-progress', function(event, info) {
     install.progress(info.transferred, info.total);
-})
+});
 
 var lastCompleted = 0;
 var lastTime = new Date();
